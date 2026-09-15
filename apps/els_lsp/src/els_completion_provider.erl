@@ -1064,6 +1064,9 @@ is_in_heuristic(Text, Attr, Line) ->
         <<" ", _/binary>> when Line > 1 ->
             %% Indented line, continue to search previous line
             is_in_heuristic(Text, Attr, Line - 1);
+        <<"\t", _/binary>> when Line > 1 ->
+            %% Indented line by hard tab
+            is_in_heuristic(Text, Attr, Line - 1);
         _ ->
             false
     end.
